@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite CV</title>
+  <style>
+    /* General styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #f48a12;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 1rem;
+    }
+
+    /* Main content styles */
+    main {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+    }
+
+    .contact-us {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .contact-us h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-group textarea {
+      resize: none;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #f48a12;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #d9790f;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      emailjs.init("rOzgeSvA1Lu_8kjuP");
+    })();
+
+    function sendemail(event) {
+      event.preventDefault(); // Prevent form submission
+      var email = "mhif3878@gmail.com";
+      var from_name = document.getElementById("name").value;
+      var message = document.getElementById("message").value;
+
+      var templateParams = {
+        email: email,
+        to_name: from_name,
+        message: message
+      };
+
+      emailjs.send('service_4fc4tad', 'template_0w8saaj', templateParams)
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+          window.alert("Sent successfully!");
+        })
+        .catch(function(error) {
+          console.error('FAILED...', error);
+          window.alert("Failed to send email!");
+        });
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Elite CV</h1>
+    <p>You can ask any question from us</p>
+  </header>
+  <main>
+    <section class="contact-us">
+      <h2>Contact Us</h2>
+      <form onsubmit="sendemail(event)">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Feedback</label>
+          <textarea id="message" rows="4" placeholder="Enter your message" required></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
